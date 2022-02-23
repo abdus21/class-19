@@ -1,0 +1,39 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: poppins;
+}
+
+
+a,
+a:hover{
+    text-decoration: none;
+    color: #000;
+}
+
+li{
+    list-style: none;
+}
+
+.dataa{
+    width: 1000px;
+    margin: 100px auto 0px;
+}
+
+.samad-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(122, 118, 118, 0.7);
+    display: none;
+}
+.samad-modal .modal-content{
+    width: 30%;
+    height: auto;
+
+}
