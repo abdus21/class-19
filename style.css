@@ -32,6 +32,10 @@ li{
     background-color: rgba(122, 118, 118, 0.7);
     display: none;
 }
+.samad-modal.active{
+    display: flex;
+}
+
 .samad-modal .modal-content{
     width: 30%;
     height: auto;

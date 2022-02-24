@@ -3,7 +3,7 @@
 function modal_add(){
    //const samad_modal = document.querySelector('.samad-modal');
     const add_deves = document.querySelector('#add_deves');
-    const data_show = document.querySelector('.data_show');
+   
 
         // modal
         add_deves.style.display = 'flex';
@@ -20,7 +20,6 @@ function modal_add(){
 function modal_view(){
    //const samad_modal = document.querySelector('.samad-modal');
     const view_deves = document.querySelector('#view_deves');
-    const data_show = document.querySelector('.data_show');
 
         // modal
         view_deves.style.display = 'flex';
@@ -37,7 +36,6 @@ function modal_view(){
 function modal_edit(id){
    //const samad_modal = document.querySelector('.samad-modal');
     const edit_deves = document.querySelector('#edit_deves');
-    const data_show = document.querySelector('.data_show');
 
         // modal
         edit_deves.style.display = 'flex';
@@ -72,22 +70,43 @@ function modal_edit(id){
                   
 
 }
-function modal_delete(){
+function modal_delete(id){
    //const samad_modal = document.querySelector('.samad-modal');
     const delete_deves = document.querySelector('#delete_deves');
-    const data_show = document.querySelector('.data_show');
 
         // modal
-        delete_deves.style.display = 'flex';
+        delete_deves.classList.add('active')
 
       
         delete_deves.addEventListener('click', function(e){
             if(e.target == this){
-                delete_deves.style.display = 'none';
+                delete_deves.classList.remove('active')
+                console.log(delete_deves)
             }else{
-                delete_deves.style.display = 'flex';
+                //delete_deves.classList.add('active')
             }
         });
+        const cancel_modal = document.querySelector('#cancel_modal');
+        const delete_data = document.querySelector('#delete_data');
+
+        cancel_modal.addEventListener('click', function(e){
+            e.preventDefault();
+            delete_deves.classList.remove('active');
+        console.log(delete_deves)
+       });
+       delete_data.addEventListener('click', function(e){
+        e.preventDefault();
+        delete_deves.classList.remove('active');
+
+        axios.delete(`http://localhost:5050/deves/${id}`).then(res =>{
+            add_new_deveoper()
+            console.log(delete_data)
+        })
+       })
+
+       console.log(id)
+
+
 }
 
 
@@ -166,7 +185,7 @@ const add_new_deveoper = () =>{
             <td><img src="${data.photo}" style="object-fit:cover; width:50px; height:50px" alt=""></td>
             <td><a  onclick="modal_view()" class="btn btn-info btn-sm" href="#"><i class="fa-solid fa-eye"></i></a></td>
             <td><a  onclick="modal_edit(${data.id})" class="btn btn-warning btn-sm" href="#"><i class="fa-solid fa-pen-to-square"></i></a></td>
-            <td><a  onclick="modal_delete()" class="btn btn-danger btn-sm" href="#"><i class="fa-solid fa-trash"></i></a></td>
+            <td><a  onclick="modal_delete(${data.id})" class="btn btn-danger btn-sm" href="#"><i class="fa-solid fa-trash"></i></a></td>
         </tr>
             `
         });
@@ -209,3 +228,6 @@ deves_edit_form.addEventListener('submit', function(e){
         //this.querySelector('#skil-load').value = '';
         this.querySelector('#cell').value = '';
 })
+
+
+
