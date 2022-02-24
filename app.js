@@ -17,9 +17,9 @@ function modal_add(){
             }
         });
 }
-function modal_view(){
-   //const samad_modal = document.querySelector('.samad-modal');
+function modal_view(id){
     const view_deves = document.querySelector('#view_deves');
+    const view_single_data = document.querySelector('.view_single_data');
 
         // modal
         view_deves.style.display = 'flex';
@@ -32,6 +32,20 @@ function modal_view(){
                 view_deves.style.display = 'flex';
             }
         });
+
+        axios.get(`http://localhost:5050/deves/${id}`).then(res => {
+            view_single_data.innerHTML = `
+            <div class="card">
+            <img class="card-image ml-5 w-75" src="${res.data.photo}" id="view_img" alt="">
+            <div class="card-body">
+                <h2>${res.data.name}</h2>     
+                <h5>${res.data.email}</h5>
+                <h5><span>Skill</span> :${res.data.skillId}</h5>
+            </div>
+        </div>
+            ` 
+        })
+
 }
 function modal_edit(id){
    //const samad_modal = document.querySelector('.samad-modal');
@@ -183,7 +197,7 @@ const add_new_deveoper = () =>{
             <td>${data.email}</td>
             <td>0193883888</td>
             <td><img src="${data.photo}" style="object-fit:cover; width:50px; height:50px" alt=""></td>
-            <td><a  onclick="modal_view()" class="btn btn-info btn-sm" href="#"><i class="fa-solid fa-eye"></i></a></td>
+            <td><a  onclick="modal_view(${data.id})" class="btn btn-info btn-sm" href="#"><i class="fa-solid fa-eye"></i></a></td>
             <td><a  onclick="modal_edit(${data.id})" class="btn btn-warning btn-sm" href="#"><i class="fa-solid fa-pen-to-square"></i></a></td>
             <td><a  onclick="modal_delete(${data.id})" class="btn btn-danger btn-sm" href="#"><i class="fa-solid fa-trash"></i></a></td>
         </tr>
