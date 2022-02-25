@@ -33,18 +33,24 @@ function modal_view(id){
             }
         });
 
-        axios.get(`http://localhost:5050/deves/${id}`).then(res => {
+        axios.get(`http://localhost:5050/deves/${id}`).then(data => {
+
+        let skilid = data.data.skillId;
+            axios.get(`http://localhost:5050/skill/${skilid}`).then(skill => {
+             
             view_single_data.innerHTML = `
             <div class="card">
-            <img class="card-image ml-5 w-75" src="${res.data.photo}" id="view_img" alt="">
+            <img class="card-image ml-5 w-75" src="${data.data.photo}" alt="">
             <div class="card-body">
-                <h2>${res.data.name}</h2>     
-                <h5>${res.data.email}</h5>
-                <h5><span>Skill</span> :${res.data.skillId}</h5>
+                <h3><span>Name</span>  :${data.data.name}</h3>     
+                <h5><span>Email</span> :${data.data.email}</h5>
+                <h5><span>Skill</span> :${skill.data.name}</h5>
             </div>
         </div>
-            ` 
-        })
+            `; 
+        });
+
+        });
 
 }
 function modal_edit(id){
